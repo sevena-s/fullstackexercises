@@ -2,17 +2,23 @@ import React from "react";
 
 const App = () => {
   const course = "Half Stack application development"
-  const part1 = "Fundamentals of React"
-  const ex1 = 10
-  const part2 = "Using props to pass data"
-  const ex2 = 7
-  const part3 = "State of a component"
-  const ex3 = 14
+  const part1 = {
+    name: "Fundamentals of React",
+    ex: 10
+  }
+  const part2 = {
+    name: "Using props to pass ",
+    ex: 7
+  }
+  const part3 = {
+    name: "State of a component",
+    ex: 14
+  }
   return (
     <div>
       <Header course={course}/>
-      <Content part1={part1} part2= {part2} part3= {part3} ex1= {ex1} ex2= {ex2} ex3= {ex3}/>
-      <Total total={ex1+ex2+ex3}/>
+      <Content part1={part1.name} part2= {part2.name} part3= {part3.name} ex1= {part1.ex} ex2= {part2.ex} ex3= {part3.ex}/>
+      <Total total={part1.ex+part2.ex+part3.ex}/>
     </div>
   )
 }
