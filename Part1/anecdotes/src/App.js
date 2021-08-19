@@ -23,10 +23,9 @@ const App = () => {
     const copy = [...votes]
     copy[selected] += 1
     setVotes(copy)
-
-    setMost(votes.reduce((iMax, x, i, arr) => x > arr[iMax] ? i : iMax, 0))
+    setMost(copy.reduce((iMax, x, i, arr) => x > arr[iMax] ? i : iMax, 0))
   }
-  
+
   return (
     <div>
       <h1>Anecdote of the Day</h1>
@@ -36,6 +35,7 @@ const App = () => {
       {votes[selected]}
       <h1>Anecdote with the Most Votes</h1>
       {anecdotes[most]}
+      {votes[most]}
     </div>
   )
 
