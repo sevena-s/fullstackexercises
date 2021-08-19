@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import React,{useState} from 'react';
 
@@ -7,6 +6,49 @@ const Button = ({handleClick, text}) => (
     {text}
   </button>
 )
+
+const StatisticLine = ({text, value}) => {
+  return(
+   <div>
+  <table>
+    <thead>
+    <tr>
+      <td> {text} </td>
+      <td> {value} </td>
+    </tr>
+    </thead>
+  </table>
+  </div> 
+  )
+}
+
+const Statistics = (props) => {
+  return(
+    <div>
+      <StatisticLine text={"Good"} value= {props.good}/>
+      <StatisticLine text={"Neutral"} value= {props.neutral}/>
+      <StatisticLine text={"Bad"} value= {props.bad}/>
+      <StatisticLine text={"All"} value= {props.allScores}/>
+      <StatisticLine text={"Average"} value= {props.avg/props.allScores}/>
+      <StatisticLine text={"Positive Percent"} value={(props.good/props.allScores)*100}/>
+    </div>
+  )
+}
+
+const History = (props) => {
+  if(props.allScores === 0){
+    return(
+      <div>
+        No FeedBack Given
+      </div>
+    )
+  }
+  return(
+    <div>
+      <Statistics good={props.good} neutral={props.neutral} bad={props.bad} allScores={props.allScores} avg={props.avg}/>
+    </div>
+  )
+}
 
 function App() {
   const [good, setGood] = useState(0)
@@ -37,12 +79,7 @@ function App() {
       <Button handleClick={handleNeutral} text= {'Neutral'}/>
       <Button handleClick={handleBad} text= {'Bad'}/>
       <h1>Statistics</h1>
-      <p>Good {good}</p>
-      <p>Neutral {neutral}</p>
-      <p>Bad {bad}</p>
-      <p>All {allScores}</p>
-      <p>Average {avg/allScores}</p>
-      <p>Positive Percent {(good/allScores)*100} %</p>
+      <History good= {good} neutral= {neutral} bad= {bad} allScores= {allScores} avg= {avg}/> 
     </div>
   )
 }
