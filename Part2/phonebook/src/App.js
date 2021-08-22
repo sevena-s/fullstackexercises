@@ -3,26 +3,34 @@ import React,{useState} from 'react'
 const App = () => {
   const [persons, setPersons] = useState([
     {
-      name: 'Arto Hellas'
+      name: 'Arto Hellas',
+      number: '604'
     }
   ])
 
   const [newName, setNewName] = useState('')
+  const [newNumber, setNewNumber] = useState('')
 
   const addNumber = (event) => {
     event.preventDefault()
     const numberObject = {
-      name: newName
+      name: newName,
+      number: newNumber
     }
 
-    const check = persons.map(number => number.name).includes(newName) ?
+    const check = persons.map(phone => phone.name).includes(newName) ?
     null:
     setPersons(persons.concat(numberObject))
     setNewName('')
+    setNewNumber('')
+  }
+
+  const handleNewName = (event) => {
+    setNewName(event.target.value)
   }
 
   const handleNewNumber = (event) => {
-    setNewName(event.target.value)
+    setNewNumber(event.target.value)
   }
 
   return(
@@ -32,6 +40,12 @@ const App = () => {
         <div>
           name: <input 
           value={newName}
+          onChange={handleNewName}
+          />
+        </div>
+        <div>
+          number: <input 
+          value={newNumber}
           onChange={handleNewNumber}
           />
         </div>
@@ -42,8 +56,8 @@ const App = () => {
         </div>
       </form>
       <h2>Numbers</h2>
-      {persons.map(number =>
-        <Numbers key={number.name} number ={number} /> )}
+      {persons.map(phone =>
+        <Numbers key={phone.name} number ={phone} /> )}
     </div>
   )
 
@@ -52,7 +66,7 @@ const App = () => {
 
 const Numbers = ({number}) => {
   return(
-    <p>{number.name}</p>
+    <p>{number.name} {number.number}</p>
   )
 }
 
