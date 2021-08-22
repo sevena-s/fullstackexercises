@@ -28,14 +28,15 @@ const App = () => {
 
   return (
     <div>
-      <h1>Anecdote of the Day</h1>
+      <h1 style={{ color: '#f542bf' }}>Anecdote of the Day</h1>
       {anecdotes[selected]}
-      <button onClick= {handleButton}>Next Anecdote </button>
-      <button onClick= {handleVotes}>Vote</button>
-      {votes[selected]}
-      <h1>Anecdote with the Most Votes</h1>
+      <p>Votes: {votes[selected]}</p>
+      <p></p>
+      <button style={{ color: '#f542bf' }} onClick= {handleButton}>Next Anecdote </button>
+      <button style={{ color: '#f542bf' }} onClick= {handleVotes}>Vote</button>
+      <h1 style={{ color: '#f542bf' }}>Anecdote with the Most Votes</h1>
       {anecdotes[most]}
-      {votes[most]}
+      <p>Votes: {votes[most]}</p>
     </div>
   )
 
