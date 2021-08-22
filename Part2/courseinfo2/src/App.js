@@ -2,27 +2,34 @@ import React from "react";
 
 const App = () => {
   const course = {
+    id: 1,
     name: "Half Stack application development",
     parts: [
     {
       name: "Fundamentals of React",
-      ex: 10
+      ex: 10,
+      id: 1
     },
     {
      name: "Using props to pass ",
-     ex: 7
+     ex: 7,
+     id: 2
     },
     {
       name: "State of a component",
-      ex: 14
+      ex: 14,
+      id: 3
     }
   ]
 }
-  return (
+  return <Course course={course}/>
+}
+
+const Course = ({course}) => {
+  return(
     <div>
       <Header course={course.name}/>
       <Content parts={course.parts}/>
-      <Total parts={course.parts}/>
     </div>
   )
 }
