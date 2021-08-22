@@ -12,9 +12,11 @@ const App = () => {
   const addNumber = (event) => {
     event.preventDefault()
     const numberObject = {
-      name: newName,
-      id: persons.length + 1
+      name: newName
     }
+
+    const check = persons.map(number => number.name).includes(newName) ?
+    null:
     setPersons(persons.concat(numberObject))
     setNewName('')
   }
@@ -30,10 +32,13 @@ const App = () => {
         <div>
           name: <input 
           value={newName}
-          onChange={handleNewNumber}/>
+          onChange={handleNewNumber}
+          />
         </div>
         <div>
-          <button type='submit'>add</button>
+          <button type='submit' onClick= {() => (persons.map(number => number.name).includes(newName))
+          ? window.alert(newName + ' is already added')
+          : persons}>add</button>
         </div>
       </form>
       <h2>Numbers</h2>
