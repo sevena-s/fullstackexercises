@@ -1,12 +1,13 @@
 import React from "react";
 
 const App = () => {
-  const course = {
+  const course = [
+    {
     id: 1,
-    name: "Half Stack application development",
+    name: "Half Stack application development ",
     parts: [
     {
-      name: "Fundamentals of React",
+      name: "Fundamentals of React ",
       ex: 10,
       id: 1
     },
@@ -16,21 +17,57 @@ const App = () => {
      id: 2
     },
     {
-      name: "State of a component",
+      name: "State of a component ",
       ex: 14,
       id: 3
+    },
+    {
+      name: "Redux ",
+      ex: 11,
+      id: 4
+    }
+  ]
+},
+{
+  id: 2,
+  name: 'Node.js',
+  parts: [
+    {
+      name: 'Routing ',
+      ex: 3,
+      id: 1
+    },
+    {
+      name: 'Middlewares ',
+      ex: 7,
+      id: 2
     }
   ]
 }
-  return <Course course={course}/>
+  ]
+  //return <Course course={course}/>      
+
+  return(
+    <div>
+      <ul>
+        {course.map(part =>
+          <div key={part.id}>
+            {
+              <Course course={part}/>
+            }
+          </div>)}
+      </ul>
+    </div>
+  )
+
 }
 
 const Course = ({course}) => {
   return(
     <div>
       <Header course={course.name}/>
-      <Content parts={course.parts}/>
-      <Total parts={course.parts}/>
+      <Content courses={course.parts}/>
+      <Total courses={course.parts}/>
     </div>
   )
 }
@@ -45,34 +82,24 @@ const Header = (props) => {
   )
 }
 
-const Content = (props) => {
-  const [one,two,three] = props.parts
+const Content = ({courses}) => {
   return(
     <div>
-      <Part part={one.name} ex={one.ex}/>
-      <Part part={two.name} ex={two.ex}/>
-      <Part part={three.name} ex={three.ex}/>
+        {courses.map((part,i) =>
+          <p key={i}>
+            {part.name} {part.ex}
+          </p>)}
     </div>
   )
 }
 
-const Total = ({parts}) => {
-  const parts2 = parts.map(part=>part.ex)
+const Total = ({courses}) => {
+  const parts2 = courses.map(part=>part.ex)
   const total = parts2.reduce((s,p) => s += p)
-  
+
   return(
     <div>
       <p>Number of Exercises {total}</p>
-    </div>
-  )
-}
-
-const Part = (props) => {
-  return (
-    <div>
-      <p>
-        {props.part} {props.ex}
-      </p>
     </div>
   )
 }
