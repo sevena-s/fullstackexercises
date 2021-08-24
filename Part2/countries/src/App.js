@@ -5,6 +5,7 @@ const App = () => {
 
   const [newSearch, setSearch] = useState('')
   const [countries, setCountries] = useState([])
+  const [checker, setChecker] = useState(false)
 
   const hook = () => {
     console.log('effect')
@@ -19,6 +20,10 @@ const App = () => {
 
   const addSearch = (event) => {
     event.preventDefault()
+    const test = countries.map(country => country.name)
+    setChecker(test.some(a=>a.includes(newSearch)))
+
+    console.log(checker)
     setSearch('')
   }
 
@@ -37,10 +42,9 @@ const App = () => {
       />
     </div>
   </form>
-  {countries.map(country =>
-            <p key={country.name}>
-              {country.name}
-            </p>)}
+  {checker ? (countries.filter(country => country.name.includes(newSearch))).map(country => 
+  <p key={country.name}> {country.name}</p>) : countries.map(country =>
+    <p key={country.name}> {country.name}</p>)}
   </div>
   )
 }
