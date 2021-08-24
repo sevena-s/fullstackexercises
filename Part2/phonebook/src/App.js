@@ -29,9 +29,8 @@ const App = () => {
 
   const addSearch = (event) => {
     event.preventDefault()
-
     const test = persons.map(phone => phone.name)
-    setChecker(test.some(a=>a.includes('d')))
+    setChecker(test.some(a=>a.includes(newSearch)))
 
     console.log(checker)
     console.log(newSearch)
@@ -91,6 +90,10 @@ const App = () => {
     </div>
   )
 
+
+}
+
+const Filter = () => {
 
 }
 
