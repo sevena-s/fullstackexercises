@@ -7,7 +7,6 @@ const App = () => {
   const [newSearch, setSearch] = useState('')
   const [countries, setCountries] = useState([])
   const [checker, setChecker] = useState(true)
-  const [tester, setTester] = useState(true)
 
   const hook = () => {
     console.log('effect')
@@ -24,7 +23,6 @@ const App = () => {
     event.preventDefault()
     const test = countries.map(country => country.name)
     setChecker(test.some(a=>a.includes(newSearch)))
-    setTester(array.length > 10)
 
     console.log(checker)
     setSearch('')
@@ -34,8 +32,8 @@ const App = () => {
     setSearch(event.target.value)
   }
   console.log(newSearch)
-  console.log(tester)
   const array = (countries.filter(country => country.name.includes(newSearch)))
+  console.log(array)
 
   return(
   <div>
@@ -47,10 +45,41 @@ const App = () => {
       />
     </div>
   </form>
-  {(array.length>10) ?
-    <p>Too many countries!</p>
-    : (<CheckSearch checker= {checker} countries= {countries} newSearch= {newSearch}/>)}
+    <CheckOneCountry checker= {checker} countries= {countries} newSearch= {newSearch} array= {array}/>
   </div>
+  )
+}
+
+const CheckOneCountry = ({checker, countries, newSearch, array}) => {
+  return(
+    <div>
+      {(array.length === 1) ?
+      (<OneCountryDisplay array= {array}/>)
+      :(<CheckCountryDisplay checker= {checker} countries= {countries} newSearch= {newSearch} array= {array}/>)}
+    </div>
+  )
+}
+
+const OneCountryDisplay = ({array}) => {
+  const flag = array.map(country => country.flag)
+  return(
+    <div>
+      <h1>{array.map(country => country.name)}</h1>
+      <p>Capital: {array.map(country => country.capital)}</p>
+      <p>Population: {array.map(country => country.population)}</p>
+      <h1>Languages</h1>
+      <img src={flag}/>
+    </div>
+  )
+}
+
+const CheckCountryDisplay = ({checker, countries, newSearch, array}) => {
+  return(
+    <div>
+      {(array.length>10) ?
+      <p>Too many countries!</p>
+      : (<CheckSearch checker= {checker} countries= {countries} newSearch= {newSearch}/>)}
+    </div>
   )
 }
 
