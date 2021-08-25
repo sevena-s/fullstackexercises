@@ -62,13 +62,24 @@ const CheckOneCountry = ({checker, countries, newSearch, array}) => {
 
 const OneCountryDisplay = ({array}) => {
   const flag = array.map(country => country.flag)
+
   return(
     <div>
       <h1>{array.map(country => country.name)}</h1>
       <p>Capital: {array.map(country => country.capital)}</p>
       <p>Population: {array.map(country => country.population)}</p>
       <h1>Languages</h1>
-      <img src={flag}/>
+      {array.map((item, index) => (
+        <div key={index}>
+        {item.languages.map((c, i) => (
+          <div key={i}>
+          <li>{c.name}</li>
+          </div>
+        ))}
+        </div>
+      ))}
+      <p></p>
+      <img src={flag} style={{ height: 125, width: 125 }}/>
     </div>
   )
 }
