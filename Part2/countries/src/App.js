@@ -9,8 +9,8 @@ const App = () => {
   const [newSearch, setSearch] = useState('')
   const [countries, setCountries] = useState([])
   const [checker, setChecker] = useState(true)
-  const [weather, setWeather] = useState([])
   const [capital, setCapital] = useState('New York')
+  const [weather, setWeather] = useState([])
 
   const hookWeather = () => {
     console.log('effect')
@@ -23,7 +23,6 @@ const App = () => {
   }
   useEffect(hookWeather,[capital])
 
-
   const hook = () => {
     console.log('effect')
     axios
@@ -34,25 +33,26 @@ const App = () => {
       })
   }
   useEffect(hook,[])
+  const array = (countries.filter(country => country.name.includes(newSearch)))
 
   const addSearch = (event) => {
     event.preventDefault()
     const test = countries.map(country => country.name)
     setChecker(test.some(a=>a.includes(newSearch)))
-
-    console.log(checker)
-    setSearch('')
+    if(array.length === 1){
+      setCapital(array.map(cap => cap.capital))
+    }
   }
 
   const handleSearchName = (event) => {
     setSearch(event.target.value)
   }
   console.log(newSearch)
-  const array = (countries.filter(country => country.name.includes(newSearch)))
+
 
   return(
   <div>
-  <form onSubmit= {addSearch}>
+  <form onChange= {addSearch}>
     <div>
       Search countries: <input 
       value={newSearch}
@@ -66,6 +66,7 @@ const App = () => {
 }
 
 const CheckOneCountry = ({checker, countries, newSearch, array, weather}) => {
+
   return(
     <div>
       {(array.length === 1) ?
@@ -78,12 +79,14 @@ const CheckOneCountry = ({checker, countries, newSearch, array, weather}) => {
 const DisplayWeather = ({array, weather}) => {
   const cap = array.map(country => country.capital)
   const image = weather.current.weather_icons
+  console.log(weather)
 
   return(
     <div>
       <h1>Weather in {cap}</h1>
       <p>Temperature: {weather.current.temperature}</p>
       <img src={image} style={{ height: 125, width: 125 }}/>
+      <p>Wind: {weather.current.wind_speed} mph Direction {weather.current.wind_dir}</p>
     </div>
   )
 }
@@ -91,6 +94,7 @@ const DisplayWeather = ({array, weather}) => {
 const OneCountryDisplay = ({array, weather}) => {
   console.log(array)
   const flag = array.map(country => country.flag)
+
   return(
     <div>
       <h1>{array.map(country => country.name)}</h1>
@@ -140,19 +144,18 @@ const CheckSearch = ({checker, countries, newSearch, weather}) => {
 const Button = ({array, weather}) => {
   const [showAll, setShowAll] = useState(false)
 
-  const name = array.map(country => country.capital)
-  console.log(weather)
-
   return(
     <div>
     <button onClick={() => {
       (setShowAll(!showAll));
     }}>
       show
-      {showAll ? 
-      <OneCountryDisplay array= {array} weather= {weather}/>
-      :null} 
     </button>
+    {showAll ?
+      <div> 
+      <OneCountryDisplay array= {array} weather= {weather}/>
+      </div>
+      :null} 
     </div>
   )
 }
