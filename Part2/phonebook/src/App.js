@@ -11,6 +11,7 @@ const App = () => {
   const [newSearch, setSearch] = useState('')
   const [checker, setChecker] = useState(false)
   const [errorMessage, setErrorMessage] = useState(null)
+  const [messageColor, setMessageColor] = useState("added")
 
   const hook = () => {
     console.log('effect')
@@ -40,6 +41,7 @@ const App = () => {
         setErrorMessage(
         `${newName} has been added`
         )
+        setMessageColor("added")
         setTimeout(() => {
         setErrorMessage(null)
         }, 5000)
@@ -89,7 +91,23 @@ const App = () => {
           ? window.confirm(`Would you like change ${newName}'s number?`) ?
           numberService
             .update(persons[index].id,numberObject)
-            .then(window.location.reload()) 
+            .then(response =>{ 
+              setErrorMessage(
+              `${newName} has been added`
+              )
+              setTimeout(() => {
+              setErrorMessage(null)
+              }, 5000)
+              window.location.reload()
+            })
+            .catch(error => {
+              setErrorMessage(
+                `${newName} has already been removed from the server`
+                )
+                setMessageColor("error")
+                setTimeout(() => {
+                setErrorMessage(null)
+                }, 5000)})
           : null
           : window.alert(newName + ' is already added')
     }
@@ -102,7 +120,7 @@ const App = () => {
   return(
     <div>
       <h2>Phonebook</h2>
-      <Notification message={errorMessage} />
+      <Notification message={errorMessage} color={messageColor}/>
       <form onSubmit= {addSearch}>
         <div>
           Search Names with: <input 

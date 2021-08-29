@@ -1,10 +1,10 @@
-const Notification = ({ message }) => {
+const Notification = ({ message, color }) => {
     if (message === null) {
       return null
     }
   
     return (
-      <div className="added">
+      <div className= {color}>
         {message}
       </div>
     )
