@@ -1,5 +1,6 @@
 import React,{useState, useEffect} from 'react'
 import axios from 'axios'
+import numberService from './services/numbers'
 
 const App = () => {
   const [persons, setPersons] = useState([])
@@ -37,9 +38,13 @@ const App = () => {
 
     const check = persons.map(phone => phone.name).includes(newName) ?
     null:
-    setPersons(persons.concat(numberObject))
-    setNewName('')
-    setNewNumber('')
+    numberService
+      .create(numberObject)
+      .then(reponse => {
+      setPersons(persons.concat(numberObject))
+      setNewName('')
+      setNewNumber('')
+      })
   }
 
   const addSearch = (event) => {
@@ -105,10 +110,6 @@ const App = () => {
     </div>
   )
 
-
-}
-
-const Filter = () => {
 
 }
 
