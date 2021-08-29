@@ -4,13 +4,6 @@ import numberService from './services/numbers'
 
 const App = () => {
   const [persons, setPersons] = useState([])
-/*  useState([
-    { name: 'Arto Hellas', number: '040-123456' },
-    { name: 'Ada Lovelace', number: '39-44-5323523' },
-    { name: 'Dan Abramov', number: '12-43-234345' },
-    { name: 'Mary Poppendieck', number: '39-23-6423122'}
-  ])
-  */
 
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
@@ -41,9 +34,9 @@ const App = () => {
     numberService
       .create(numberObject)
       .then(reponse => {
-      setPersons(persons.concat(numberObject))
-      setNewName('')
-      setNewNumber('')
+    setPersons(persons.concat(numberObject))
+    setNewName('')
+    setNewNumber('')
       })
   }
 
@@ -71,7 +64,32 @@ const App = () => {
     setSearch(event.target.value)
   }
 
-  console.log(newSearch)
+  const handleSameName = (event) => {
+    const numberObject = {
+      name: newName,
+      number: newNumber
+    }
+
+    if(persons.map(number => number.name).includes(newName)){
+    const numberArray = (persons.map(nums => nums.number))
+    const nameArray = (persons.map(names => names.name))
+    const index = nameArray.indexOf(newName)
+
+    console.log(index)
+    console.log(persons[index].id)
+    const sames = (numberArray[index] !== (newNumber))
+          ? window.confirm(`Would you like change ${newName}'s number?`) ?
+          numberService
+            .update(persons[index].id,numberObject)
+            .then(window.location.reload()) 
+          : null
+          : window.alert(newName + ' is already added')
+    }
+    else{
+      setPersons(persons)
+    }
+    console.log(newNumber)
+  }
 
   return(
     <div>
@@ -99,23 +117,30 @@ const App = () => {
           />
         </div>
         <div>
-          <button type='submit' onClick= {() => (persons.map(number => number.name).includes(newName))
-          ? window.alert(newName + ' is already added')
-          : persons}>add</button>
+          <button type='submit' onClick= {handleSameName}>add</button>
         </div>
       </form>
       <h2>Numbers</h2>
       {console.log(newSearch)}
-      {checker ? (persons.filter(person => person.name.includes(newSearch))).map(phone => <Numbers key={phone.name} number ={phone} /> ) : persons.map(phone => <Numbers key= {phone.name} number= {phone} />)}
+      {checker ? (persons.filter(person => person.name.includes(newSearch))).map(phone => <Numbers key={phone.name} number ={phone} id={phone.id} person={phone.name}/> ) : persons.map(phone => <Numbers key= {phone.name} number= {phone} id={phone.id} person={phone.name}/>)}
     </div>
   )
 
 
 }
 
-const Numbers = ({number}) => {
+const Numbers = ({number,id, person}) => {
   return(
+    <div>
     <p>{number.name} {number.number}</p>
+    <button onClick={() => 
+      window.confirm(`Are you Sure you want to delete ${person}?`) ?
+        numberService
+          .deleteNumber(id)
+          .then(window.location.reload()) 
+        : null
+    }>Delete</button>
+    </div>
   )
 }
 
