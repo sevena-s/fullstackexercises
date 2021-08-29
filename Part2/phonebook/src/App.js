@@ -1,6 +1,7 @@
 import React,{useState, useEffect} from 'react'
 import axios from 'axios'
 import numberService from './services/numbers'
+import Notification from './components/Notification'
 
 const App = () => {
   const [persons, setPersons] = useState([])
@@ -9,6 +10,7 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('')
   const [newSearch, setSearch] = useState('')
   const [checker, setChecker] = useState(false)
+  const [errorMessage, setErrorMessage] = useState(null)
 
   const hook = () => {
     console.log('effect')
@@ -34,9 +36,15 @@ const App = () => {
     numberService
       .create(numberObject)
       .then(reponse => {
-    setPersons(persons.concat(numberObject))
-    setNewName('')
-    setNewNumber('')
+        setPersons(persons.concat(numberObject))
+        setErrorMessage(
+        `${newName} has been added`
+        )
+        setTimeout(() => {
+        setErrorMessage(null)
+        }, 5000)
+        setNewName('')
+        setNewNumber('')
       })
   }
 
@@ -94,6 +102,7 @@ const App = () => {
   return(
     <div>
       <h2>Phonebook</h2>
+      <Notification message={errorMessage} />
       <form onSubmit= {addSearch}>
         <div>
           Search Names with: <input 
