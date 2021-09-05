@@ -15,14 +15,15 @@ const App = () => {
 
   const hook = () => {
     console.log('effect')
-    axios 
-      .get('http://localhost:3001/persons')
+    numberService
+      .getAll()
       .then(response =>{
         console.log('promise fulfilled')
         setPersons(response.data)
       })
 
   }
+
   useEffect(hook, [])
 
   const addNumber = (event) => {
