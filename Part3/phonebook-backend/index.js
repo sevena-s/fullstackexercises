@@ -3,10 +3,13 @@ const express = require('express')
 const app = express()
 const morgan = require('morgan')
 const cors = require('cors')
+const mongoose = require('mongoose')
+const PhoneBook = require('./models/phone')
 
 app.use(express.json())
 
 morgan.token('body', (req, res) => JSON.stringify(req.body));
+
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'));
 app.use(cors())
 app.use(express.static('build'))
@@ -14,7 +17,7 @@ app.use(express.static('build'))
 let persons = [
   {
     "id": 1,
-    "name": "Arto Hellas",
+    "name": "Art Hellas",
     "number": "040-123456"
   },
   {
@@ -46,12 +49,14 @@ app.get('/api/persons/:id', (request, response) => {
   })
 
 app.get('/api/persons', (request, response) => {
-    response.json(persons)
+    PhoneBook.find({}).then(persons => {
+      response.json(persons)
+    })
   })
 
 app.get('/info', (request, response) => {
     response.send(
-        `<div>Phonebook has info for ${persons.length} people
+        `<div>Phonebook has info for ${PhoneBook.length} people
         <p>${new Date()} </p></div>`
         )
   })
@@ -81,15 +86,17 @@ app.post('/api/persons', (request, response) => {
         })
     }
     
-    const person = {
+    const person = new PhoneBook({
         id: generateID(),
         name: body.name,
         number: body.number,
-      }
+      })
     
-      persons = persons.concat(person)
+      //persons = persons.concat(person)
     
-      response.json(person)
+      person.save().then(savedPerson => {
+        response.json(savedPerson)
+      })
 })
 
 
