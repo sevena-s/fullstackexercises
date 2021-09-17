@@ -6,8 +6,6 @@ const cors = require('cors')
 const mongoose = require('mongoose')
 const PhoneBook = require('./models/phone')
 
-
-
 morgan.token('body', (req, res) => JSON.stringify(req.body));
 
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'));
@@ -20,6 +18,9 @@ const errorHandler = (error, request, response, next) => {
 
   if(error.name === 'CastError') {
     return response.status(400).send({error: 'malformatted id'})
+  }
+  else if (error.name === 'ValidationError') {
+    return response.status(400).json({ error: error.message })
   }
   next(error)
 }
@@ -85,7 +86,7 @@ const generateID = () => {
     return Math.floor(Math.random() * 1000)
 }
   
-app.post('/api/persons', (request, response) => {
+app.post('/api/persons', (request, response, next) => {
     const body = request.body
 
     if (!body.name || !body.number) {
@@ -104,11 +105,13 @@ app.post('/api/persons', (request, response) => {
         id: generateID(),
         name: body.name,
         number: body.number,
+        runValidators: true
       })
     
       person.save().then(savedPerson => {
         response.json(savedPerson)
       })
+      .catch(error => next(error))
 })
 
 app.put('/api/persons/:id', (request, response, next) => {

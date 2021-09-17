@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const uniqueValidator = require('mongoose-unique-validator');
 
 const url = `mongodb+srv://fullstacker:money@cluster0.fli8o.mongodb.net/test?retryWrites=true&w=majority`
 
@@ -8,8 +9,14 @@ mongoose.connect(url, err => {
   });
 
 const phoneSchema = new mongoose.Schema({
-    name: String,
-    number: Number,
+    name: {
+        type: String,
+        minlength: 3
+    },
+    number: {
+        type: String,
+        minlength: 8
+    }
   })
   
   phoneSchema.set('toJSON', {

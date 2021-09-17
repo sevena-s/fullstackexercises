@@ -49,6 +49,13 @@ const App = () => {
         setNewName('')
         setNewNumber('')
       })
+      .catch(error => {
+        setErrorMessage(`Person Validation Failed: ${newName} must be minimum length(3) & ${newNumber} must be minimum length(8)`)
+        setMessageColor("error")
+        setTimeout(() => {
+        setErrorMessage(null)
+        }, 5000)
+      })
   }
 
   const addSearch = (event) => {

@@ -17,9 +17,16 @@ mongoose.connect(url, err => {
 });
 
 const phoneSchema = new mongoose.Schema({
-  name: String,
-  number: Number,
+  name: {
+      type: String,
+      minlength: 3
+  },
+  number: {
+      type: Number,
+      minlength: 8
+  }
 })
+phoneSchema.plugin(uniqueValidator);
 
 const Phonenumber = mongoose.model('PhoneNumber', phoneSchema)
 
