@@ -26,7 +26,7 @@ const App = () => {
   const hook = () => {
     console.log('effect')
     axios
-      .get('https://restcountries.eu/rest/v2/all')
+      .get('https://restcountries.com/v3.1/all')
       .then(response => {
         console.log('promise fulfilled')
         setCountries(response.data)

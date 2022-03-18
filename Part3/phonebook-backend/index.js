@@ -1,10 +1,9 @@
-require('dotenv').config()
 const http = require('http')
 const express = require('express')
 const app = express()
 const morgan = require('morgan')
 const cors = require('cors')
-const mongoose = require('mongoose')
+require('dotenv').config()
 const PhoneBook = require('./models/phone')
 
 morgan.token('body', (req, res) => JSON.stringify(req.body));
@@ -86,6 +85,11 @@ app.delete('/api/persons/:id', (request, response, next) => {
 const generateID = () => {
     return Math.floor(Math.random() * 1000)
 }
+
+const generateColor = () => {
+  let colors = ["#2493FF", "#FFC224", "#A4D05F", "#FF6624"]
+  return colors[Math.floor(Math.random() * 4)];
+}
   
 app.post('/api/persons', (request, response, next) => {
     const body = request.body
@@ -106,6 +110,7 @@ app.post('/api/persons', (request, response, next) => {
         id: generateID(),
         name: body.name,
         number: body.number,
+        color: body.color,
         runValidators: true
       })
     

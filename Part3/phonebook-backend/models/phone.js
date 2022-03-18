@@ -16,6 +16,9 @@ const phoneSchema = new mongoose.Schema({
     number: {
         type: String,
         minlength: 8
+    },
+    color: {
+      type: String
     }
   })
   

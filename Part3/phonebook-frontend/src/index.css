@@ -1,10 +1,38 @@
+@font-face {
+  font-family: Outfit-Light;
+  src: url(./fonts/Outfit-Light.woff2);
+}
+
+@font-face {
+  font-family: Outfit-ExLight;
+  src: url(./fonts/Outfit-ExtraLight.woff2);
+}
+
+@font-face {
+  font-family: Outfit-Regular;
+  src: url(./fonts/Outfit-Regular.woff2);
+}
+
 body {
-  margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #F2F2F2;
+  /* background-image: url(./images/background.png);
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat; */
+}
+
+input:focus{
+  outline: none;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: black;
+  opacity: 1; /* Firefox */
 }
 
 code {
@@ -13,7 +41,8 @@ code {
 }
 .added {
   color: green;
-  background: lightgrey;
+  background: #F2F2F2;
+  font-family: Outfit-Light;
   font-size: 20px;
   border-style: solid;
   border-radius: 5px;
@@ -23,10 +52,194 @@ code {
 
 .error {
   color: red;
-  background: lightgrey;
+  background: #F2F2F2;
+  font-family: Outfit-Light;
   font-size: 20px;
   border-style: solid;
   border-radius: 5px;
   padding: 10px;
   margin-bottom: 10px;
+}
+/* Content CSS */
+
+.container{
+  margin: 0 1rem 0 1rem;
+}
+
+.title{
+  font-family: Outfit-Light;
+  font-size: 2rem;
+}
+
+.heading{
+  display: flex;
+}
+
+.contacts-icon{
+  width: 100%;
+  height: auto;
+  max-width: 5rem;
+}
+
+.content{
+  margin: 2rem auto 0 auto;
+  display: flex;
+  justify-content: center;
+  gap: 5rem;
+}
+
+.numbers{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.contacts{
+  width: 28rem;
+}
+
+/* Search Bar */
+
+.search-container{
+  border: 1px solid black;
+  border-radius: 1rem;
+  padding: 0.2rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.search-icon{
+  width: 100%;
+  height: auto;
+  max-width: 1.25rem;
+  margin-left: 0.2rem;
+}
+
+.search-input{
+  border: white;
+  border-radius: 1rem;
+  font-family: Outfit-Light;
+  padding: 0.5rem;
+  width: 16rem;
+  background-color: #F2F2F2;
+}
+
+/* Add Number */
+
+.new-title{
+  font-family: Outfit-Light;
+  font-size: 1.25rem;
+  margin-left: 0.5rem;
+}
+
+.add-form{
+  display: flex;
+  flex-direction: column;
+}
+
+.add-container{
+  display: flex;
+  flex-direction: column;
+}
+
+.input-fields{
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background-color: white;
+  padding: 2rem 2.5rem 2rem 2rem;
+  border-radius: 1rem 1rem 0 1rem;
+}
+
+.add-info{
+  border: 1px solid black;
+  border-radius: 1rem;
+  background-color: white;
+  width: 15rem;
+}
+
+.add-input{
+  background-color: white;
+  border-radius: 1rem;
+  border: none;
+  font-family: Outfit-Light;
+  font-size: 1rem;
+  color: black;
+  padding: 0.5rem;
+}
+
+.button-container{
+  margin-left: auto;
+}
+
+.add-button{
+  border: 1px solid white;
+  font-family: Outfit-Regular;
+  font-size: 1rem;
+  background-color: white;
+  color: #39B87D;
+  padding: 0.5rem;
+  border-radius: 0 0 1rem 1rem;
+  width: 5rem;
+  transition-duration: 0.5s;
+}
+
+.add-button:hover, .add-button:focus{
+  border: 1px solid #39B87D;
+  background-color: #39B87D;
+  color: white;
+  cursor: pointer;
+}
+
+/* List of Contacts */
+
+.item{
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  font-family: Outfit-Regular;
+  background-color: white;
+  border-radius: 1rem;
+  padding-left: 1rem;
+}
+
+.profile-icon{
+  background-color:black;
+  padding: 0.7rem 0.95rem 0.7rem 0.95rem;
+  border-radius: 0.75rem;
+  color: white;
+}
+
+.number{
+  font-family: Outfit-Light;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.delete-container{
+  margin-left: auto;
+  border-radius: 0 1rem 1rem 0;
+}
+
+.delete-button{
+  font-family: Outfit-Regular;
+  background-color: white;
+  border: none;
+  font-size: 1rem;
+  margin-left: auto;
+  color: #F53649;
+  transition-duration: 0.5s;
+  border-radius: 0 1rem 1rem 0;
+  padding: 2rem 0.5rem 2rem 0.5rem;
+  margin-right: 0.5rem;
+  width: 100%;
+  font-size: 0.9rem;
+}
+
+.delete-container:hover, .delete-container:focus, .delete-button:hover, .delete-button:focus{ 
+  cursor: pointer;
+  background-color: #F53649;
+  color: white;
 }
