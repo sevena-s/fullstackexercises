@@ -13,6 +13,8 @@ const App = () => {
   const [errorMessage, setErrorMessage] = useState(null)
   const [messageColor, setMessageColor] = useState("added")
 
+  const[profColor, setProfColor] = useState("#2493FF")
+
   const generateColor = () => {
     let colors = ["#2493FF", "#FFC224", "#A4D05F", "#FF6624"]
     return colors[Math.floor(Math.random() * 4)];
@@ -36,7 +38,7 @@ const App = () => {
     const numberObject = {
       name: newName,
       number: newNumber,
-      color: generateColor()
+      color: profColor
     }
 
     const check = persons.map(phone => phone.name).includes(newName) ?
@@ -87,11 +89,15 @@ const App = () => {
     setSearch(event.target.value)
   }
 
+  const handleProfileColor = (event) => {
+    setProfColor(event.target.id)
+  }
+
   const handleSameName = (event) => {
     const numberObject = {
       name: newName,
       number: newNumber,
-      color: generateColor()
+      color: profColor
     }
 
     if (persons.map(number => number.name).includes(newName)) {
@@ -184,6 +190,13 @@ const App = () => {
                 <button class="add-button" type='submit' onClick={handleSameName}>Add</button>
               </div>
             </form>
+            <div class="color-buttons">
+                  {/* <p class="color-text">Colour</p> */}
+                  <button class="but1 prof-buttons" id="#2493FF" onClick={handleProfileColor}></button>
+                  <button class="but2 prof-buttons" id="#FFC224" onClick={handleProfileColor}></button>
+                  <button class="but3 prof-buttons"id="#A4D05F" onClick={handleProfileColor}></button>
+                  <button class="but4 prof-buttons" id="#FF6624" onClick={handleProfileColor}></button>
+                </div>
           </div>
         </div>
       </div>

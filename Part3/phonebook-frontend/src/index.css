@@ -137,6 +137,47 @@ code {
 .add-form{
   display: flex;
   flex-direction: column;
+  position: relative;
+}
+
+.color-buttons{
+  position: absolute;
+  top: 9.2rem;
+  left: 5rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.prof-buttons{
+  border: 1.25px solid transparent;;
+  border-radius: 0.25rem;
+  padding: 0.75rem;
+  transition-duration: 0.25s;
+}
+
+.prof-buttons:hover, .prof-buttons:focus{
+  cursor: pointer;
+  border: 1.25px solid black;
+}
+
+.color-text{
+  margin: 0;
+  font-family: Outfit-Light;
+  font-size: 1rem;
+}
+
+.but1{
+  background-color: #2493FF;
+}
+.but2{
+  background-color: #FFC224;
+}
+.but3{
+  background-color: #A4D05F;
+}
+.but4{
+  background-color: #FF6624;
 }
 
 .add-container{
@@ -149,7 +190,7 @@ code {
   flex-direction: column;
   gap: 1.5rem;
   background-color: white;
-  padding: 2rem 2.5rem 2rem 2rem;
+  padding: 2rem 2.5rem 4rem 2rem;
   border-radius: 1rem 1rem 0 1rem;
 }
 
@@ -242,4 +283,19 @@ code {
   cursor: pointer;
   background-color: #F53649;
   color: white;
+}
+
+@media(max-width: 54.5rem){
+
+  .content{
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+}
+
+@media(max-width: 30rem){
+
+  .contacts{
+    width: 21rem;
+  }
 }
